@@ -3,12 +3,14 @@ import logo from "./logo.svg";
 import "./App.css";
 import Button from "./components/Button";
 import Title from "./components/Title";
+import Subtitle from "./components/Subtitle";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Title title="Super puper React App" />
+        <Title title="Super puper React App (React.Component)" />
+        <Subtitle title="Component without React lifecycle methods (Rreact.PureComponent)" />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -21,7 +23,7 @@ function App() {
         >
           Learn React
         </a>
-        <Button title="test button" />
+        <Button title="test button (Functionl component)" />
       </header>
     </div>
   );
