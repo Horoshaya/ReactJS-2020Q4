@@ -4,6 +4,7 @@ import "./App.css";
 import Button from "./components/Button";
 import Title from "./components/Title";
 import Subtitle from "./components/Subtitle";
+import Note from "./components/Note";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           Learn React
         </a>
         <Button title="test button (Functionl component)" />
+        {Note}
       </header>
     </div>
   );
