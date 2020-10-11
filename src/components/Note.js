@@ -7,7 +7,4 @@ const Note = React.createElement(
   "hello React App (Rreact.CreateElement)"
 );
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(Note, rootElement);
-
 export default Note;
