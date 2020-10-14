@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -51,6 +52,9 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[name].css",
     }),
+    new FaviconsWebpackPlugin(
+      path.join(__dirname, "../src", "/assets/images/favicon.ico")
+    ),
   ],
   resolve: {
     modules: [path.resolve(__dirname, "./src"), "node_modules"],
