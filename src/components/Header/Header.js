@@ -1,14 +1,14 @@
 import React from "react";
-import styles from "./Header.scss";
+import styles from "./Header.css";
 import Logo from "../Logo/Logo";
 import Search from "../Search/Search";
 import AddMovieButton from "../AddMovieButton/AddMovieButton";
 
 const Header = () => {
   return (
-    <>
-      <header className={styles.header}>
-        <div className={styles.blur}>
+    <header className={styles.header}>
+      <div className={styles.blur}>
+        <div className={styles.wrapper}>
           <div className={styles.headerTop}>
             <Logo />
             <AddMovieButton />
@@ -19,8 +19,8 @@ const Header = () => {
             <Search />
           </div>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 };
 

@@ -4,6 +4,11 @@
   background-blend-mode: revert;
 }
 
+.wrapper {
+  width: 1000px;
+  margin: 0 auto;
+}
+
 .headerTop {
   display: flex;
   justify-content: space-between;
@@ -11,7 +16,7 @@
 }
 
 .searchWrapper {
-  padding: 50px;
+  padding: 30px;
 }
 
 .mainTitle {
