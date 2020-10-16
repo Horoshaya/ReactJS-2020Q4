@@ -31,18 +31,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "../src/assets/images",
-              publicPath: "../dist",
-            },
-          },
-          "image-webpack-loader",
-        ],
+        test: /\.(png|jpg|svg|gif)$/,
+        use: ["file-loader"],
       },
     ],
   },
