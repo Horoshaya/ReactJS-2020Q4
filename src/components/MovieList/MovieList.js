@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./MovieList.css";
 import MovieCard from "../MovieCard/MovieCard";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import img1 from "../../assets/images/inception.jpg";
 import img2 from "../../assets/images/pulp_fiction.jpg";
 
@@ -66,15 +67,17 @@ const movies = [
 const MovieList = () => {
   return (
     <div className={styles.wrapper}>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          imgUrl={movie.url}
-          title={movie.title}
-          description={movie.description}
-          year={movie.year}
-        />
-      ))}
+      <ErrorBoundary>
+        {movies.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            imgUrl={movie.url}
+            title={movie.title}
+            description={movie.description}
+            year={movie.year}
+          />
+        ))}
+      </ErrorBoundary>
     </div>
   );
 };
