@@ -6,7 +6,9 @@ const MovieFilters = ({ tabs }) => {
   return (
     <>
       {tabs.map((tab) => (
-        <FilterTab>{tab}</FilterTab>
+        <FilterTab key={tab.id} isActive={tab.isActive}>
+          {tab.title}
+        </FilterTab>
       ))}
     </>
   );

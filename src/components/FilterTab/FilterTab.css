@@ -2,6 +2,13 @@
   padding: 20px 15px;
   font-size: 18px;
   color: #ffffff;
+  text-transform: uppercase;
   background: none;
   border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.active {
+  border-bottom: 2px solid #f65261;
 }
