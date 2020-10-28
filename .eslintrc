@@ -1,0 +1,37 @@
+{
+  "plugins": ["react"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react"
+  ],
+  "rules": {
+    "react/destructuring-assignment": "off",
+    "react/state-in-constructor": "off",
+    "no-nested-ternary": "off",
+    "max-depth": ["error", 4],
+    "semi": ["error", "always"],
+    "indent": ["error", 2],
+    "max-len": [
+      "error",
+      {
+        "code": 80
+      }
+    ],
+    "no-multi-spaces": "error",
+    "no-console": [
+      "off",
+      {
+        "allow": ["info", "warn", "error"]
+      }
+    ]
+  }
+}

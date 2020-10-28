@@ -1,10 +1,12 @@
 import React from "react";
+import styles from "./Footer.css";
+import Logo from "../Logo/Logo";
 
 const Footer = () => {
   return (
-    <h2>
-      <span>NETFLIX</span>roulette
-    </h2>
+    <footer className={styles.wrapper}>
+      <Logo />
+    </footer>
   );
 };
 

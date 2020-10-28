@@ -18,26 +18,21 @@ module.exports = {
         use: ["babel-loader"],
       },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         use: [
-          { loader: MiniCssExtractPlugin.loader },
-          "css-loader",
-          "sass-loader",
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true,
+            },
+          },
         ],
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "../src/assets/images",
-              publicPath: "../dist",
-            },
-          },
-          "image-webpack-loader",
-        ],
+        test: /\.(png|jpg|svg|gif)$/,
+        use: ["file-loader"],
       },
     ],
   },

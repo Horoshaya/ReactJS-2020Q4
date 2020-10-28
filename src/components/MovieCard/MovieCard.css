@@ -1,0 +1,20 @@
+.card {
+  position: relative;
+  width: 300px;
+  color: #ffffff;
+}
+
+.img {
+  width: 100%;
+}
+
+.mainInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.year {
+  padding: 2px 10px;
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+}
