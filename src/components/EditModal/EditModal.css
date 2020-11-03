@@ -1,0 +1,28 @@
+.title {
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reset,
+.save {
+  padding: 10px 15px;
+  text-transform: uppercase;
+  border: 1px solid #f65261;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reset {
+  color: #f65261;
+  background: #232323;
+}
+
+.save {
+  color: #ffffff;
+  background: #f65261;
+}
