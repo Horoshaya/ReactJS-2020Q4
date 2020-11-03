@@ -1,17 +1,61 @@
-import React from "react";
-import styles from "./MovieSort.css";
-import FilterTab from "../FilterTab/FilterTab";
+import React, { Component } from 'react';
+import styles from './MovieSort.css';
 
-const MovieSort = ({ tabs }) => {
-  return (
-    <>
-      {tabs.map((tab) => (
-        <FilterTab key={tab.id} isActive={tab.isActive}>
-          {tab.title}
-        </FilterTab>
-      ))}
-    </>
-  );
-};
+export default class MovieSort extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      listOpen: false,
+    };
 
-export default MovieSort;
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.toggleList = this.toggleList.bind(this);
+  }
+
+  handleClickOutside() {
+    this.setState({
+      listOpen: false,
+    });
+  }
+  toggleList() {
+    this.setState((prevState) => ({
+      listOpen: !prevState.listOpen,
+    }));
+  }
+
+  render() {
+    const { list, toggleItem, headerTitle } = this.props;
+    const { listOpen } = this.state;
+
+    return (
+      <div className={styles.wrapper}>
+        <p className={styles.title}>sort by</p>
+
+        <div
+          className={`${styles.dropdownHeader} ${
+            listOpen ? styles.arrowUp : styles.arrowDown
+          }`}
+          onClick={() => this.toggleList()}
+        >
+          <div className={styles.headerTitle}>{headerTitle}</div>
+        </div>
+
+        {listOpen && (
+          <ul className={styles.list}>
+            {list.map((item) => (
+              <li
+                className={`${styles.listItem} ${
+                  item.selected ? styles.selected : ''
+                }`}
+                key={item.id}
+                onClick={() => toggleItem(item.id, item.key)}
+              >
+                {item.title}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    );
+  }
+}

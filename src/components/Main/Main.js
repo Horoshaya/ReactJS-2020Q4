@@ -1,6 +1,6 @@
-import React from "react";
-import MovieList from "../MovieList/MovieList";
-import FiltersBar from "../FiltersBar/FiltersBar";
+import React from 'react';
+import MovieList from '../MovieList/MovieList';
+import FiltersBar from '../FiltersBar/FiltersBar';
 
 const Main = () => {
   return (

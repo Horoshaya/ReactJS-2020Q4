@@ -47,27 +47,3 @@ export default class MovieMoreInfo extends Component {
     );
   }
 }
-// const MovieMoreInfoButton = ({ openDropdown, isDropdownOpen, openModal }) => {
-//   return (
-//     <>
-//       <div className={styles.moreButton} onClick={openDropdown}></div>
-
-//       {isDropdownOpen ? (
-//         <ul className={styles.list}>
-//           <span
-//             className={styles.closeIcon}
-//             onClick={showMoreInfoDropdown}
-//           ></span>
-//           <li className={styles.itemButton} onClick={() => openModal('edit')}>
-//             Edit
-//           </li>
-//           <li className={styles.itemButton} onClick={() => openModal('delete')}>
-//             Delete
-//           </li>
-//         </ul>
-//       ) : null}
-//     </>
-//   );
-// };
-
-// export default MovieMoreInfoButton;
