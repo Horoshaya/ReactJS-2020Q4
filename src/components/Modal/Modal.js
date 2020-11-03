@@ -1,24 +1,15 @@
 import React from 'react';
 import styles from './Modal.css';
 
-const Modal = ({ showMoreInfoModal, isModalShow, children }) => {
+const Modal = ({ triggerModal, children }) => {
   return (
-    <>
-      {isModalShow ? (
-        <div className={styles.wrapper}>
-          <div className={styles.modal}>
-            <span
-              className={styles.closeIcon}
-              onClick={showMoreInfoModal}
-            ></span>
-            {children}
-          </div>
-          <div className={styles.overlay}></div>
-        </div>
-      ) : (
-        <></>
-      )}
-    </>
+    <div className={styles.wrapper}>
+      <div className={styles.modal}>
+        <span className={styles.closeIcon} onClick={triggerModal}></span>
+        {children}
+      </div>
+      <div className={styles.overlay}></div>
+    </div>
   );
 };
 

@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+
 import styles from './MovieList.css';
 import MovieCard from '../MovieCard/MovieCard';
-import EditModal from '../EditModal/EditModal';
-import DeleteModal from '../DeleteModal/DeleteModal';
-
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+
 import img1 from '../../assets/images/inception.jpg';
 import img2 from '../../assets/images/pulp_fiction.jpg';
 
@@ -74,6 +73,7 @@ const MovieList = () => {
         {movies.map((movie) => (
           <MovieCard
             key={movie.id}
+            id={movie.id}
             imgUrl={movie.url}
             title={movie.title}
             description={movie.description}

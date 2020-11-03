@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+
 import styles from './MovieCard.css';
-import PropTypes from 'prop-types';
-import MovieMoreInfoButton from '../MovieMoreInfoButton/MovieMoreInfoButton';
+import MovieMoreInfo from '../MovieMoreInfo/MovieMoreInfo';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import EditModal from '../EditModal/EditModal';
+import ModifyModal from '../ModifyModal/ModifyModal';
 import DeleteModal from '../DeleteModal/DeleteModal';
 
 export default class MovieCard extends Component {
@@ -13,42 +13,29 @@ export default class MovieCard extends Component {
     this.state = {
       isEditModal: false,
       isDeleteModal: false,
-      isModalShow: false,
     };
 
-    this.showMoreInfoModal = this.showMoreInfoModal.bind(this);
-    this.openModal = this.openModal.bind(this);
+    this.triggerModal = this.triggerModal.bind(this);
   }
 
-  resetModals() {
-    this.setState({ isEditModal: false });
-    this.setState({ isDeleteModal: false });
-  }
-
-  openModal(modalName) {
-    if (modalName === 'edit') {
-      this.setState({ isEditModal: true });
+  triggerModal(modalName) {
+    if (modalName === 'modify') {
+      this.setState(({ isEditModal }) => ({
+        isEditModal: !isEditModal,
+      }));
     } else if (modalName === 'delete') {
-      this.setState({ isDeleteModal: true });
+      this.setState(({ isDeleteModal }) => ({
+        isDeleteModal: !isDeleteModal,
+      }));
     }
   }
 
-  showMoreInfoModal() {
-    this.resetModals();
-    this.state.isModalShow
-      ? this.setState({ isModalShow: false })
-      : this.setState({ isModalShow: true });
-  }
   render() {
     return (
-      <div className={styles.wrapper}>
+      <>
         <ErrorBoundary>
           <div className={styles.card}>
-            <MovieMoreInfoButton
-              showMoreInfoModal={this.showMoreInfoModal}
-              openModal={this.openModal}
-              isModalShow={this.state.isModalShow}
-            />
+            <MovieMoreInfo triggerModal={this.triggerModal} />
             <img className={styles.img} src={this.props.imgUrl} />
             <div className={styles.mainInfo}>
               <h3>{this.props.title}</h3>
@@ -57,24 +44,17 @@ export default class MovieCard extends Component {
             <p>{this.props.description}</p>
           </div>
         </ErrorBoundary>
+
         {this.state.isEditModal ? (
-          <EditModal
-            showMoreInfoModal={this.showMoreInfoModal}
-            isModalShow={this.state.isModalShow}
+          <ModifyModal
+            triggerModal={this.triggerModal}
             movieInfo={this.props}
-          ></EditModal>
-        ) : (
-          <></>
-        )}
+          ></ModifyModal>
+        ) : null}
         {this.state.isDeleteModal ? (
-          <DeleteModal
-            showMoreInfoModal={this.showMoreInfoModal}
-            isModalShow={this.state.isModalShow}
-          ></DeleteModal>
-        ) : (
-          <></>
-        )}
-      </div>
+          <DeleteModal triggerModal={this.triggerModal}></DeleteModal>
+        ) : null}
+      </>
     );
   }
 }

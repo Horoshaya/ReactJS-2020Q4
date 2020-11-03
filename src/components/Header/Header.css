@@ -1,6 +1,6 @@
 .header {
   background-image: linear-gradient(#00000096, #00000096),
-    url("../../assets/images/movie-colloage.jpg");
+    url('../../assets/images/movie-colloage.jpg');
   background-blend-mode: revert;
 }
 
@@ -11,8 +11,11 @@
 
 .headerTop {
   display: flex;
+  padding-top: 20px;
+  margin: 0 auto;
+  width: 1000px;
   justify-content: space-between;
-  backdrop-filter: blur(12px);
+  /* backdrop-filter: blur(12px); */
 }
 
 .searchWrapper {
