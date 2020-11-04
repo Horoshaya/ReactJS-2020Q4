@@ -12,14 +12,9 @@ export default class MovieSort extends Component {
     this.toggleList = this.toggleList.bind(this);
   }
 
-  handleClickOutside() {
-    this.setState({
-      listOpen: false,
-    });
-  }
   toggleList() {
-    this.setState((prevState) => ({
-      listOpen: !prevState.listOpen,
+    this.setState(({ listOpen }) => ({
+      listOpen: !listOpen,
     }));
   }
 
