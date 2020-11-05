@@ -1,14 +1,16 @@
-import React from "react";
-import styles from "./MovieList.css";
-import MovieCard from "../MovieCard/MovieCard";
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
-import img1 from "../../assets/images/inception.jpg";
-import img2 from "../../assets/images/pulp_fiction.jpg";
+import React from 'react';
+
+import styles from './MovieList.css';
+import MovieCard from '../MovieCard/MovieCard';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+
+import img1 from '../../assets/images/inception.jpg';
+import img2 from '../../assets/images/pulp_fiction.jpg';
 
 const movies = [
   {
     id: 1,
-    title: "Coco",
+    title: 'Coco',
     description:
       "Coco's rich visual pleasures are matched by a thoughtful narrative that takes a family-friendly -- and deeply affecting -- approach to questions of culture, family, life, and death.",
     year: 2020,
@@ -16,23 +18,23 @@ const movies = [
   },
   {
     id: 2,
-    title: "Coco",
+    title: 'Reservoir Dogs',
     description:
-      "Coco's rich visual pleasures are matched by a thoughtful narrative that takes a family-friendly -- and deeply affecting -- approach to questions of culture, family, life, and death.",
-    year: 2020,
+      'The film is regarded as a classic of independent film and a cult film,[4] and was named "Greatest Independent Film of all Time" by Empire.',
+    year: 1994,
     url: img2,
   },
   {
     id: 3,
-    title: "LOGAN",
+    title: 'LOGAN',
     description:
-      "Hugh Jackman makes the most of his final outing as Wolverine with a gritty, nuanced performance in a violent but surprisingly thoughtful superhero action film that defies genre conventions.",
+      'Hugh Jackman makes the most of his final outing as Wolverine with a gritty, nuanced performance in a violent but surprisingly thoughtful superhero action film that defies genre conventions.',
     year: 2019,
     url: img1,
   },
   {
     id: 4,
-    title: "MOONLIGHT",
+    title: 'MOONLIGHT',
     description:
       "Moonlight uses one man's story to offer a remarkable and brilliantly crafted look at lives too rarely seen in cinema.",
     year: 2018,
@@ -40,7 +42,7 @@ const movies = [
   },
   {
     id: 5,
-    title: "MOONLIGHT",
+    title: 'MOONLIGHT',
     description:
       "Moonlight uses one man's story to offer a remarkable and brilliantly crafted look at lives too rarely seen in cinema.",
     year: 2018,
@@ -48,7 +50,7 @@ const movies = [
   },
   {
     id: 6,
-    title: "MOONLIGHT",
+    title: 'MOONLIGHT',
     description:
       "Moonlight uses one man's story to offer a remarkable and brilliantly crafted look at lives too rarely seen in cinema.",
     year: 2018,
@@ -56,10 +58,10 @@ const movies = [
   },
   {
     id: 7,
-    title: "MOONLIGHT",
+    title: 'Intercaption',
     description:
-      "Moonlight uses one man's story to offer a remarkable and brilliantly crafted look at lives too rarely seen in cinema.",
-    year: 2018,
+      'Inception is a 2010 science fiction action film[4][5][6] written and directed by Christopher Nolan, who also produced the film with his wife, Emma Thomas.',
+    year: 2003,
     url: img2,
   },
 ];
@@ -71,6 +73,7 @@ const MovieList = () => {
         {movies.map((movie) => (
           <MovieCard
             key={movie.id}
+            id={movie.id}
             imgUrl={movie.url}
             title={movie.title}
             description={movie.description}

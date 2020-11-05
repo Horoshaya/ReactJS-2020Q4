@@ -1,0 +1,16 @@
+import React from 'react';
+
+import Modal from '../Modal/Modal';
+import styles from './DeleteModal.css';
+
+const DeleteModal = ({ triggerModal }) => {
+  return (
+    <Modal triggerModal={() => triggerModal('delete')}>
+      <h2 className={styles.title}>delete movie</h2>
+      <p>Are you sure you want to delete this movie?</p>
+      <button className={styles.button}>confirm</button>
+    </Modal>
+  );
+};
+
+export default DeleteModal;

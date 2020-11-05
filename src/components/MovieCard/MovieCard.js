@@ -1,25 +1,60 @@
-import React from "react";
-import styles from "./MovieCard.css";
-import PropTypes from "prop-types";
-import MovieMoreInfoButton from "../MovieMoreInfoButton/MovieMoreInfoButton";
+import React, { Component } from 'react';
 
-const MovieCard = ({ imgUrl, title, description, year }) => {
-  return (
-    <div className={styles.card}>
-      <MovieMoreInfoButton />
-      <img className={styles.img} src={imgUrl} />
-      <div className={styles.mainInfo}>
-        <h3>{title}</h3>
-        <p className={styles.year}>{year}</p>
-      </div>
-      <p>{description}</p>
-    </div>
-  );
-};
+import styles from './MovieCard.css';
+import MovieMoreInfo from '../MovieMoreInfo/MovieMoreInfo';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import ModifyModal from '../ModifyModal/ModifyModal';
+import DeleteModal from '../DeleteModal/DeleteModal';
 
-MovieCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-};
+export default class MovieCard extends Component {
+  constructor(props) {
+    super(props);
 
-export default MovieCard;
+    this.state = {
+      isEditModal: false,
+      isDeleteModal: false,
+    };
+
+    this.triggerModal = this.triggerModal.bind(this);
+  }
+
+  triggerModal(modalName) {
+    if (modalName === 'modify') {
+      this.setState(({ isEditModal }) => ({
+        isEditModal: !isEditModal,
+      }));
+    } else if (modalName === 'delete') {
+      this.setState(({ isDeleteModal }) => ({
+        isDeleteModal: !isDeleteModal,
+      }));
+    }
+  }
+
+  render() {
+    return (
+      <>
+        <ErrorBoundary>
+          <div className={styles.card}>
+            <MovieMoreInfo triggerModal={this.triggerModal} />
+            <img className={styles.img} src={this.props.imgUrl} />
+            <div className={styles.mainInfo}>
+              <h3>{this.props.title}</h3>
+              <p className={styles.year}>{this.props.year}</p>
+            </div>
+            <p>{this.props.description}</p>
+          </div>
+        </ErrorBoundary>
+
+        {this.state.isEditModal ? (
+          <ModifyModal
+            triggerModal={this.triggerModal}
+            movieInfo={this.props}
+          ></ModifyModal>
+        ) : null}
+        {this.state.isDeleteModal ? (
+          <DeleteModal triggerModal={this.triggerModal}></DeleteModal>
+        ) : null}
+      </>
+    );
+  }
+}
