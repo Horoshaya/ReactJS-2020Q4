@@ -37,7 +37,7 @@ ModifyModal.propTypes = {
 ModifyModal.defaultProps = {
   type: '',
   movieInfo: {
-    id: '',
+    id: null,
     title: '',
     releaseDate: '',
     url: '',

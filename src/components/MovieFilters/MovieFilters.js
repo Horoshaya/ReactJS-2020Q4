@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./MovieFilters.css";
-import FilterTab from "../FilterTab/FilterTab";
+import React, { memo } from 'react';
+import styles from './MovieFilters.css';
+import FilterTab from '../FilterTab/FilterTab';
 
-const MovieFilters = ({ tabs }) => {
+const InnerMovieFilters = ({ tabs }) => {
   return (
     <>
       {tabs.map((tab) => (
@@ -14,4 +14,4 @@ const MovieFilters = ({ tabs }) => {
   );
 };
 
-export default MovieFilters;
+export const MovieFilters = memo(InnerMovieFilters);

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { memo, useState, useCallback } from 'react';
 import styles from './FiltersBar.css';
-import MovieFilters from '../MovieFilters/MovieFilters';
-import MovieSort from '../MovieSort/MovieSort';
+import { MovieFilters } from '../MovieFilters/MovieFilters';
+import { MovieSort } from '../MovieSort/MovieSort';
 
 const movieFilters = [
   {
@@ -31,77 +31,59 @@ const movieFilters = [
   },
 ];
 
-const movieSort = [
-  {
-    id: 15,
-    isActive: true,
-    title: 'Sort by',
-  },
-  {
-    id: 16,
-    isActive: false,
-    title: 'elease Date',
-  },
-];
+const InnerFiltersBar = () => {
+  const defaultTitle = 'select sort';
+  const sortList = [
+    {
+      id: 0,
+      title: 'release date',
+      selected: false,
+      key: 'sortList',
+    },
+    {
+      id: 1,
+      title: 'title',
+      selected: false,
+      key: 'sortList',
+    },
+  ];
 
-export default class FiltersBar extends Component {
-  constructor() {
-    super();
+  const [title, setTitle] = useState(defaultTitle);
+  const [list, setSortList] = useState(sortList);
 
-    this.defaultTitle = 'select sort';
+  const toggleSelected = useCallback(
+    (id) => {
+      let newSortList = list;
+      let newTitile;
 
-    this.state = {
-      title: this.defaultTitle,
-      sortList: [
-        {
-          id: 0,
-          title: 'release date',
-          selected: false,
-          key: 'sortList',
-        },
-        {
-          id: 1,
-          title: 'title',
-          selected: false,
-          key: 'sortList',
-        },
-      ],
-    };
+      newSortList.map((item) => {
+        if (item.id === id) {
+          item.selected = !item.selected;
+          newTitile = item.selected ? item.title : defaultTitle;
+        } else {
+          item.selected = false;
+        }
+      });
+      setTitle(newTitile);
+      setSortList(newSortList);
+    },
+    [list],
+  );
 
-    this.toggleSelected = this.toggleSelected.bind(this);
-  }
-
-  toggleSelected(id) {
-    let newSortList = this.state.sortList;
-    let newTitile;
-    newSortList.map((item) => {
-      if (item.id === id) {
-        item.selected = !item.selected;
-        newTitile = item.selected ? item.title : this.defaultTitle;
-      } else {
-        item.selected = false;
-      }
-    });
-    this.setState({
-      title: newTitile,
-      sortList: newSortList,
-    });
-  }
-
-  render() {
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.movieFilters}>
-          <MovieFilters tabs={movieFilters} />
-        </div>
-        <div className={styles.movieFilters}>
-          <MovieSort
-            headerTitle={this.state.title}
-            list={this.state.sortList}
-            toggleItem={this.toggleSelected}
-          />
-        </div>
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.movieFilters}>
+        <MovieFilters tabs={movieFilters} />
       </div>
-    );
-  }
-}
+      <div className={styles.movieFilters}>
+        <MovieSort
+          headerTitle={title}
+          list={list}
+          toggleItem={toggleSelected}
+        />
+      </div>
+    </div>
+  );
+};
+
+export const FiltersBar = memo(InnerFiltersBar);

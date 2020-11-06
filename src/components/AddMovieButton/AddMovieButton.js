@@ -1,38 +1,31 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import styles from './AddMovieButton.css';
 import ModifyModal from '../ModifyModal/ModifyModal';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import { usePropsLogger } from '../../hooks/usePropsLogger';
 
-export default class AddMovieButton extends Component {
-  constructor(props) {
-    super(props);
+const AddMovieButton = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
 
-    this.state = {
-      isModalOpen: false,
-    };
+  usePropsLogger(null, 'AddMovieButton');
 
-    this.triggerModal = this.triggerModal.bind(this);
-  }
+  const triggerModal = () => {
+    setModalOpen(!isModalOpen);
+  };
 
-  triggerModal() {
-    this.setState(({ isModalOpen }) => ({
-      isModalOpen: !isModalOpen,
-    }));
-  }
+  return (
+    <>
+      <ErrorBoundary>
+        <button className={styles.button} onClick={triggerModal}>
+          + add movie
+        </button>
+      </ErrorBoundary>
+      {isModalOpen ? (
+        <ModifyModal triggerModal={triggerModal}></ModifyModal>
+      ) : null}
+    </>
+  );
+};
 
-  render() {
-    return (
-      <>
-        <ErrorBoundary>
-          <button className={styles.button} onClick={this.triggerModal}>
-            + add movie
-          </button>
-        </ErrorBoundary>
-        {this.state.isModalOpen ? (
-          <ModifyModal triggerModal={this.triggerModal}></ModifyModal>
-        ) : null}
-      </>
-    );
-  }
-}
+export default AddMovieButton;

@@ -1,49 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import styles from './MovieMoreInfo.css';
 
-export default class MovieMoreInfo extends Component {
-  constructor(props) {
-    super(props);
+const MovieMoreInfo = ({ triggerModal }) => {
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-    this.state = {
-      isDropdownOpen: false,
-    };
+  const triggerDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
 
-    this.triggerModal = this.triggerModal.bind(this);
-  }
+  return (
+    <>
+      <div className={styles.moreButton} onClick={triggerDropdown}></div>
 
-  triggerModal() {
-    this.setState(({ isDropdownOpen }) => ({
-      isDropdownOpen: !isDropdownOpen,
-    }));
-  }
+      {isDropdownOpen ? (
+        <ul className={styles.list}>
+          <span className={styles.closeIcon} onClick={triggerDropdown}></span>
+          <li
+            className={styles.itemButton}
+            onClick={() => triggerModal('modify')}
+          >
+            Edit
+          </li>
+          <li
+            className={styles.itemButton}
+            onClick={() => triggerModal('delete')}
+          >
+            Delete
+          </li>
+        </ul>
+      ) : null}
+    </>
+  );
+};
 
-  render() {
-    return (
-      <>
-        <div className={styles.moreButton} onClick={this.triggerModal}></div>
-
-        {this.state.isDropdownOpen ? (
-          <ul className={styles.list}>
-            <span
-              className={styles.closeIcon}
-              onClick={this.triggerModal}
-            ></span>
-            <li
-              className={styles.itemButton}
-              onClick={() => this.props.triggerModal('modify')}
-            >
-              Edit
-            </li>
-            <li
-              className={styles.itemButton}
-              onClick={() => this.props.triggerModal('delete')}
-            >
-              Delete
-            </li>
-          </ul>
-        ) : null}
-      </>
-    );
-  }
-}
+export default MovieMoreInfo;
