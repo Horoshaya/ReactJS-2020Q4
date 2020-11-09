@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import styles from './MovieCard.css';
 import MovieMoreInfo from '../MovieMoreInfo/MovieMoreInfo';
@@ -6,55 +6,46 @@ import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import ModifyModal from '../ModifyModal/ModifyModal';
 import DeleteModal from '../DeleteModal/DeleteModal';
 
-export default class MovieCard extends Component {
-  constructor(props) {
-    super(props);
+const MovieCard = (props) => {
+  const [isEditModal, setEditModal] = useState(false);
+  const [isDeleteModal, setDeleteModal] = useState(false);
 
-    this.state = {
-      isEditModal: false,
-      isDeleteModal: false,
-    };
+  const triggerModal = useCallback(
+    (modalName) => {
+      if (modalName === 'modify') {
+        setEditModal(!isEditModal);
+      } else if (modalName === 'delete') {
+        setDeleteModal(!isDeleteModal);
+      }
+    },
+    [isDeleteModal, isEditModal],
+  );
 
-    this.triggerModal = this.triggerModal.bind(this);
-  }
-
-  triggerModal(modalName) {
-    if (modalName === 'modify') {
-      this.setState(({ isEditModal }) => ({
-        isEditModal: !isEditModal,
-      }));
-    } else if (modalName === 'delete') {
-      this.setState(({ isDeleteModal }) => ({
-        isDeleteModal: !isDeleteModal,
-      }));
-    }
-  }
-
-  render() {
-    return (
-      <>
-        <ErrorBoundary>
-          <div className={styles.card}>
-            <MovieMoreInfo triggerModal={this.triggerModal} />
-            <img className={styles.img} src={this.props.imgUrl} />
-            <div className={styles.mainInfo}>
-              <h3>{this.props.title}</h3>
-              <p className={styles.year}>{this.props.year}</p>
-            </div>
-            <p>{this.props.description}</p>
+  return (
+    <>
+      <ErrorBoundary>
+        <div className={styles.card}>
+          <MovieMoreInfo triggerModal={triggerModal} />
+          <img className={styles.img} src={props.imgUrl} />
+          <div className={styles.mainInfo}>
+            <h3>{props.title}</h3>
+            <p className={styles.year}>{props.year}</p>
           </div>
-        </ErrorBoundary>
+          <p>{props.description}</p>
+        </div>
+      </ErrorBoundary>
 
-        {this.state.isEditModal ? (
-          <ModifyModal
-            triggerModal={this.triggerModal}
-            movieInfo={this.props}
-          ></ModifyModal>
-        ) : null}
-        {this.state.isDeleteModal ? (
-          <DeleteModal triggerModal={this.triggerModal}></DeleteModal>
-        ) : null}
-      </>
-    );
-  }
-}
+      {isEditModal ? (
+        <ModifyModal
+          triggerModal={triggerModal}
+          movieInfo={props}
+        ></ModifyModal>
+      ) : null}
+      {isDeleteModal ? (
+        <DeleteModal triggerModal={triggerModal}></DeleteModal>
+      ) : null}
+    </>
+  );
+};
+
+export default MovieCard;
