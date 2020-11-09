@@ -54,17 +54,16 @@ const InnerFiltersBar = () => {
   const toggleSelected = useCallback(
     (id) => {
       let newSortList = list;
-      let newTitile;
+      let newTitle;
 
-      newSortList.map((item) => {
-        if (item.id === id) {
-          item.selected = !item.selected;
-          newTitile = item.selected ? item.title : defaultTitle;
-        } else {
-          item.selected = false;
-        }
-      });
-      setTitle(newTitile);
+      const updatedSortList = newSortList.map((item) => ({
+        ...item,
+        selected: item.id === id,
+      }));
+      const selectedItem = updatedSortList.find((item) => item.id === id);
+      newTitle = selectedItem ? selectedItem.title : defaultTitle;
+
+      setTitle(newTitle);
       setSortList(newSortList);
     },
     [list],
