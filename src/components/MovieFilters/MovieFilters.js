@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import styles from './MovieFilters.css';
 import FilterTab from '../FilterTab/FilterTab';
 
-const InnerMovieFilters = ({ tabs }) => {
+const InnerMovieFilters = ({ tabs, handleSortByGenre }) => {
   return (
     <>
       {tabs.map((tab) => (

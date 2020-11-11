@@ -6,9 +6,12 @@ import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import ModifyModal from '../ModifyModal/ModifyModal';
 import DeleteModal from '../DeleteModal/DeleteModal';
 
+import defaultImg from '../../assets/images/pulp_fiction.jpg';
+
 const MovieCard = (props) => {
   const [isEditModal, setEditModal] = useState(false);
   const [isDeleteModal, setDeleteModal] = useState(false);
+  const [src, setSrc] = useState(props.posterPath);
 
   const triggerModal = useCallback(
     (modalName) => {
@@ -21,17 +24,23 @@ const MovieCard = (props) => {
     [isDeleteModal, isEditModal],
   );
 
+  const date = new Date(props.releaseDate).getFullYear();
+
+  const onSrcError = () => {
+    return setSrc(defaultImg);
+  };
+
   return (
     <>
       <ErrorBoundary>
         <div className={styles.card}>
           <MovieMoreInfo triggerModal={triggerModal} />
-          <img className={styles.img} src={props.imgUrl} />
+          <img className={styles.img} src={src} onError={onSrcError} />
           <div className={styles.mainInfo}>
             <h3>{props.title}</h3>
-            <p className={styles.year}>{props.year}</p>
+            <p className={styles.year}>{date}</p>
           </div>
-          <p>{props.description}</p>
+          <p className={styles.overview}>{props.overview}</p>
         </div>
       </ErrorBoundary>
 

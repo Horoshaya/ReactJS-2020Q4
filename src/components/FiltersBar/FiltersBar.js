@@ -29,9 +29,14 @@ const movieFilters = [
     isActive: false,
     title: 'Crime',
   },
+  {
+    id: 15,
+    isActive: false,
+    title: 'Romance',
+  },
 ];
 
-const InnerFiltersBar = () => {
+const InnerFiltersBar = (props) => {
   const defaultTitle = 'select sort';
   const sortList = [
     {
