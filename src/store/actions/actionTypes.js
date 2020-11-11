@@ -4,6 +4,7 @@ const actionTypes = {
   DELETE_MOVIE: 'DELETE_MOVIE',
   GET_MOVIE: 'GET_MOVIE',
   SORT_BY_GENRE: 'SORT_BY_GENRE',
+  FILTERING_MOVIE: 'FILTERING_MOVIE',
 };
 
 export default actionTypes;

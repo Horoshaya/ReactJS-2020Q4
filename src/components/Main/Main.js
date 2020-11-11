@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import MovieList from '../MovieList/MovieList';
-import { FiltersBar } from '../FiltersBar/FiltersBar';
-
+import { FiltersSortBar } from '../FiltersSortBar/FiltersSortBar';
 import { getMovie, sortByGenre } from '../../store/actions/actionCreators';
 
 export const MainContext = React.createContext();
@@ -24,7 +23,7 @@ const Main = () => {
   return (
     <main>
       <MainContext.Provider value={sortMovieByGenre}>
-        <FiltersBar />
+        <FiltersSortBar />
       </MainContext.Provider>
       <MovieList movieReducer={movieReducer} />
     </main>

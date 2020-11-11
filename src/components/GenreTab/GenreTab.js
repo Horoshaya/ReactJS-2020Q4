@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import styles from './FilterTab.css';
+import styles from './GenreTab.css';
 import { MainContext } from '../Main/Main';
 
-const FilterTab = ({ isActive, children }) => {
+const GenreTab = ({ isActive, children }) => {
   const sortByGenreHandle = useContext(MainContext);
   return (
     <button
@@ -14,4 +14,4 @@ const FilterTab = ({ isActive, children }) => {
   );
 };
 
-export default FilterTab;
+export default GenreTab;

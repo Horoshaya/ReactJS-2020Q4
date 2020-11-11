@@ -1,7 +1,7 @@
 import React, { memo, useState, useCallback } from 'react';
-import styles from './FiltersBar.css';
-import { MovieFilters } from '../MovieFilters/MovieFilters';
-import { MovieSort } from '../MovieSort/MovieSort';
+import styles from './FiltersSortBar.css';
+import { GenreFilter } from '../GenreFilter/GenreFilter';
+import { SortPanel } from '../SortPanel/SortPanel';
 
 const movieFilters = [
   {
@@ -36,7 +36,7 @@ const movieFilters = [
   },
 ];
 
-const InnerFiltersBar = (props) => {
+const InnerFiltersSortBar = (props) => {
   const defaultTitle = 'select sort';
   const sortList = [
     {
@@ -77,10 +77,10 @@ const InnerFiltersBar = (props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.movieFilters}>
-        <MovieFilters tabs={movieFilters} />
+        <GenreFilter tabs={movieFilters} />
       </div>
       <div className={styles.movieFilters}>
-        <MovieSort
+        <SortPanel
           headerTitle={title}
           list={list}
           toggleItem={toggleSelected}
@@ -90,4 +90,4 @@ const InnerFiltersBar = (props) => {
   );
 };
 
-export const FiltersBar = memo(InnerFiltersBar);
+export const FiltersSortBar = memo(InnerFiltersSortBar);
