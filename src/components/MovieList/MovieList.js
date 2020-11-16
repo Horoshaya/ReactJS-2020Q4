@@ -13,10 +13,13 @@ const MovieList = ({ movieReducer }) => {
             <MovieCard
               key={movie.id}
               id={movie.id}
-              posterPath={movie.poster_path}
+              poster_path={movie.poster_path}
               title={movie.title}
               overview={movie.overview}
-              releaseDate={movie.release_date}
+              genres={movie.genres}
+              release_date={movie.release_date}
+              vote_average={movie.vote_average}
+              runtime={movie.runtime}
             />
           ))
         ) : (

@@ -25,6 +25,8 @@
   padding-top: 25px;
   width: 300px;
   min-height: 100px;
+  max-height: 50%;
+  overflow-y: scroll;
   background: #232323;
   color: #ffffff;
   z-index: 20;

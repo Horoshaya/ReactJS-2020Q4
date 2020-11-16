@@ -1,0 +1,57 @@
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 317px;
+  color: #ffffff;
+  background: #000000;
+}
+
+.header {
+  max-width: 1000px;
+  text-align: right;
+  margin: auto;
+  padding: 20px 0;
+}
+
+.closeIcon {
+  color: #ffffff;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.closeIcon:before {
+  content: '\2715';
+}
+
+.title {
+  font-size: 30px;
+}
+
+.vote {
+  margin-left: 20px;
+  padding: 15px;
+  border-radius: 50%;
+  color: #498124;
+  border: 1px solid #ffffff;
+}
+
+.movieHeader {
+  display: flex;
+}
+
+.movieWrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.movieInfo {
+  margin-left: 20px;
+}
+
+.posterPath {
+  height: 250px;
+}

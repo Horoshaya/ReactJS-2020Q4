@@ -26,3 +26,19 @@
   color: #ffffff;
   background: #f65261;
 }
+
+.label {
+  color: #f65261;
+  text-transform: uppercase;
+}
+
+.select {
+  width: 100%;
+  padding: 10px 0;
+  margin: 10px 0;
+  text-indent: 10px;
+  color: #ffffff;
+  background: #424242;
+  border: none;
+  border-radius: 4px;
+}

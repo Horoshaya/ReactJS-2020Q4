@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import MovieList from '../MovieList/MovieList';
 import { FiltersSortBar } from '../FiltersSortBar/FiltersSortBar';
-import { getMovie, sortByGenre } from '../../store/actions/actionCreators';
+import {
+  getMovie,
+  filterByGenre,
+  sortByDateAndRating,
+} from '../../store/actions/actionCreators';
 
 export const MainContext = React.createContext();
 
@@ -14,18 +18,24 @@ const Main = () => {
     dispatch(getMovie());
   }, [dispatch]);
 
-  const sortMovieByGenre = (genre) => {
-    dispatch(sortByGenre(genre, movieReducer));
+  const filterByGenreHandle = (genre) => {
+    dispatch(filterByGenre(genre, movieDataReducer));
   };
 
-  const movieReducer = useSelector((store) => store.movieReducer);
+  const sortByDateAndRatingHandle = (sortTitle) => {
+    dispatch(sortByDateAndRating(sortTitle, movieDataReducer));
+  };
+
+  const movieDataReducer = useSelector((store) => store.movieDataReducer);
 
   return (
     <main>
-      <MainContext.Provider value={sortMovieByGenre}>
+      <MainContext.Provider
+        value={{ filterByGenreHandle, sortByDateAndRatingHandle }}
+      >
         <FiltersSortBar />
       </MainContext.Provider>
-      <MovieList movieReducer={movieReducer} />
+      <MovieList movieReducer={movieDataReducer} />
     </main>
   );
 };

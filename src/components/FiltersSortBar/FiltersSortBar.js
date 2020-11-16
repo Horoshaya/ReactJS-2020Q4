@@ -36,7 +36,7 @@ const movieFilters = [
   },
 ];
 
-const InnerFiltersSortBar = (props) => {
+const InnerFiltersSortBar = () => {
   const defaultTitle = 'select sort';
   const sortList = [
     {
@@ -47,7 +47,7 @@ const InnerFiltersSortBar = (props) => {
     },
     {
       id: 1,
-      title: 'title',
+      title: 'rating',
       selected: false,
       key: 'sortList',
     },

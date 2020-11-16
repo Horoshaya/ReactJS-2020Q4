@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import movieReducer from './movie';
-import sortingReducer from './sorting';
+import movieDataReducer from './movieData';
+import modalMovieOperations from './modalMovieOperations';
 
 const rootReducer = combineReducers({
-  movieReducer,
-  sortingReducer,
+  movieDataReducer,
+  modalMovieOperations,
 });
 
 export default rootReducer;
