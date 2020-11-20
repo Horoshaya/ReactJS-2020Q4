@@ -5,10 +5,15 @@ import MovieMoreInfo from '../MovieMoreInfo/MovieMoreInfo';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import ModifyModal from '../ModifyModal/ModifyModal';
 import DeleteModal from '../DeleteModal/DeleteModal';
+import MovieDetails from '../MovieDetails/MovieDetails';
+
+import defaultImg from '../../assets/images/pulp_fiction.jpg';
 
 const MovieCard = (props) => {
   const [isEditModal, setEditModal] = useState(false);
   const [isDeleteModal, setDeleteModal] = useState(false);
+  const [src, setSrc] = useState(props.poster_path);
+  const [isOpenMovieDetaild, setOpenMovieDetaild] = useState(false);
 
   const triggerModal = useCallback(
     (modalName) => {
@@ -21,19 +26,41 @@ const MovieCard = (props) => {
     [isDeleteModal, isEditModal],
   );
 
+  const date = new Date(props.release_date).getFullYear();
+
+  const onSrcError = () => {
+    return setSrc(defaultImg);
+  };
+
+  const triggerMovieDetails = () => {
+    setOpenMovieDetaild(!isOpenMovieDetaild);
+  };
+
   return (
     <>
       <ErrorBoundary>
         <div className={styles.card}>
           <MovieMoreInfo triggerModal={triggerModal} />
-          <img className={styles.img} src={props.imgUrl} />
+          <img
+            onClick={triggerMovieDetails}
+            className={styles.img}
+            src={src}
+            onError={onSrcError}
+          />
           <div className={styles.mainInfo}>
             <h3>{props.title}</h3>
-            <p className={styles.year}>{props.year}</p>
+            <p className={styles.year}>{date}</p>
           </div>
-          <p>{props.description}</p>
+          <p className={styles.year}>{props.vote_average}</p>
+          <p className={styles.overview}>{props.overview}</p>
         </div>
       </ErrorBoundary>
+      {isOpenMovieDetaild ? (
+        <MovieDetails
+          triggerMovieDetails={triggerMovieDetails}
+          movieData={props}
+        />
+      ) : null}
 
       {isEditModal ? (
         <ModifyModal
@@ -42,7 +69,7 @@ const MovieCard = (props) => {
         ></ModifyModal>
       ) : null}
       {isDeleteModal ? (
-        <DeleteModal triggerModal={triggerModal}></DeleteModal>
+        <DeleteModal triggerModal={triggerModal} id={props.id}></DeleteModal>
       ) : null}
     </>
   );

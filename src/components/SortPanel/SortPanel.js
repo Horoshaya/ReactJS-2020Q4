@@ -1,15 +1,17 @@
-import React, { memo, useState } from 'react';
-import styles from './MovieSort.css';
+import React, { memo, useState, useContext } from 'react';
+import styles from './SortPanel.css';
 import { usePropsLogger } from '../../hooks/usePropsLogger';
+import { MainContext } from '../Main/Main';
 
-const InnerMovieSort = ({ headerTitle, list, toggleItem }) => {
+const InnerSortPanel = ({ headerTitle, list, toggleItem }) => {
   const [listOpen, setListOpen] = useState(false);
+  const { sortByDateAndRatingHandle } = useContext(MainContext);
 
   const toggleList = () => {
     setListOpen(!listOpen);
   };
 
-  usePropsLogger({ headerTitle, list, toggleItem }, 'MovieSort Props');
+  usePropsLogger({ headerTitle, list, toggleItem }, 'SortPanel Props');
 
   return (
     <div className={styles.wrapper}>
@@ -32,7 +34,10 @@ const InnerMovieSort = ({ headerTitle, list, toggleItem }) => {
                 item.selected ? styles.selected : ''
               }`}
               key={item.id}
-              onClick={() => toggleItem(item.id, item.key)}
+              onClick={() => {
+                toggleItem(item.id, item.key);
+                sortByDateAndRatingHandle(item.title);
+              }}
             >
               {item.title}
             </li>
@@ -43,4 +48,4 @@ const InnerMovieSort = ({ headerTitle, list, toggleItem }) => {
   );
 };
 
-export const MovieSort = memo(InnerMovieSort);
+export const SortPanel = memo(InnerSortPanel);
