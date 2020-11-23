@@ -41,36 +41,28 @@ const movieFilters = [
   },
 ];
 
-const Multiselect = ({ genres, handleChange }) => {
-  const chooseOption = (event) => {
-    event.persist();
-    const selectedGanres = [...event.target.selectedOptions].map(
-      (option) => option.label,
-    );
-    console.log(selectedGanres);
-
-    handleChange(selectedGanres);
-  };
-
+const Multiselect = ({ genres, name, handleChange, error, errorClassName }) => {
   return (
-    <select
-      className={styles.wrapper}
-      multiple
-      size="10"
-      onChange={chooseOption}
-    >
-      {movieFilters.map((genre) => {
-        if (genres.includes(genre.title)) {
-          return (
-            <option key={genre.id} selected>
-              {genre.title}
-            </option>
-          );
-        } else {
-          return <option key={genre.id}>{genre.title}</option>;
-        }
-      })}
-    </select>
+    <>
+      <label className={styles.label}>
+        genre
+        <select
+          className={styles.wrapper}
+          multiple
+          size="10"
+          name={name}
+          value={genres}
+          onChange={handleChange}
+        >
+          {movieFilters.map((genre) => {
+            return (
+              <option value={genre.title} key={genre.id} label={genre.title} />
+            );
+          })}
+        </select>
+      </label>
+      {error ? <div className={styles.error}>{error}</div> : null}
+    </>
   );
 };
 

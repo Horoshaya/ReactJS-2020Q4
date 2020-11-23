@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 
 import Modal from '../Modal/Modal';
 import TextField from '../TextField/TextField';
@@ -8,92 +10,95 @@ import Multiselect from '../Multiselect/Multiselect';
 import styles from './ModifyModal.css';
 import { editMovie, addMovie } from '../../store/actions/actionCreators';
 
+const ModifySchema = Yup.object().shape({
+  title: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  poster_path: Yup.string().required('Required').url('Invalid URL'),
+  genres: Yup.array().required('Choose the list of genres'),
+  runtime: Yup.number('Field must be a number')
+    .min(0)
+    .required('Enter duration time'),
+});
+
 const ModifyModal = ({ triggerModal, movieInfo }) => {
-  const [movieData, setMovieData] = useState();
+  const [selectedGenres, setSelectedGenres] = useState(movieInfo.genres);
+  const onMultiselectChange = (event) => {
+    event.persist();
+    const selectedeanres = [...event.target.selectedOptions].map(
+      (option) => option.label,
+    );
+    setSelectedGenres(selectedeanres);
+  };
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (values, { setSubmitting }) => {
     const newMoveData = {
       ...movieInfo,
-      ...movieData,
+      ...values,
       runtime: movieInfo ? movieInfo.runtime : Number(movieData.runtime),
       id: movieInfo ? movieInfo.id : new Date().getTime(),
     };
     movieInfo
       ? dispatch(editMovie(newMoveData))
       : dispatch(addMovie(newMoveData));
-  };
-
-  const handleChange = (fieldName) => (fieldValue) => {
-    setMovieData({
-      ...movieData,
-      [fieldName]: fieldValue,
-    });
+    setSubmitting(false);
   };
 
   return (
     <Modal triggerModal={() => triggerModal('modify')}>
-      <form onSubmit={handleSubmit}>
-        {movieInfo ? (
-          <h2 className={styles.title}>edit movie</h2>
-        ) : (
-          <h2 className={styles.title}>add movie</h2>
-        )}
-        <TextField label="movie id" name="id" title={movieInfo.id} />
-        <TextField
-          label="title"
-          name="title"
-          title={movieInfo.title}
-          handleChange={handleChange('title')}
-        />
-        <TextField
-          label="release date"
-          name="release_date"
-          type="date"
-          title={movieInfo.release_date}
-          handleChange={handleChange('release_date')}
-        />
-        <TextField
-          label="url"
-          name="path"
-          title={movieInfo.poster_path}
-          handleChange={handleChange('poster_path')}
-        />
+      <Formik
+        enableReinitialize
+        initialValues={{
+          id: movieInfo.id,
+          title: movieInfo.title,
+          release_date: movieInfo.release_date,
+          poster_path: movieInfo.poster_path,
+          overview: movieInfo.overview,
+          vote_average: movieInfo.vote_average,
+          runtime: movieInfo.runtime,
+          genres: selectedGenres,
+        }}
+        onSubmit={handleSubmit}
+        validationSchema={ModifySchema}
+      >
+        {({ errors }) => (
+          <Form>
+            {movieInfo ? (
+              <h2 className={styles.title}>edit movie</h2>
+            ) : (
+              <h2 className={styles.title}>add movie</h2>
+            )}
+            <TextField label="movie id" name="id" />
+            <TextField label="title" name="title" error={errors.title} />
+            <TextField label="release date" name="release_date" type="date" />
+            <TextField
+              label="url"
+              name="poster_path"
+              error={errors.poster_path}
+            />
 
-        <label className={styles.label}>
-          genre
-          <Multiselect
-            genres={movieInfo.genres ? movieInfo.genres : []}
-            handleChange={handleChange('genres')}
-          />
-        </label>
-        <TextField
-          label="overview"
-          name="overview"
-          title={movieInfo.overview}
-          handleChange={handleChange('overview')}
-        />
-        <TextField
-          label="vote_average"
-          name="vote_average"
-          type="number"
-          title={movieInfo.vote_average}
-          handleChange={handleChange('vote_average')}
-        />
-        <TextField
-          label="runtime"
-          name="runtime"
-          title={movieInfo.runtime}
-          handleChange={handleChange('runtime')}
-        />
-        <div className={styles.buttonsWrapper}>
-          <button className={styles.reset}>reset</button>
-          <button type="submit" className={styles.save}>
-            save
-          </button>
-        </div>
-      </form>
+            <Multiselect
+              name="genres"
+              genres={movieInfo.genres ? selectedGenres : []}
+              handleChange={onMultiselectChange}
+              error={errors.genres}
+            />
+
+            <TextField label="overview" name="overview" />
+            <TextField label="vote_average" name="vote_average" type="number" />
+            <TextField label="runtime" name="runtime" error={errors.runtime} />
+
+            <div className={styles.buttonsWrapper}>
+              <button className={styles.reset}>reset</button>
+              <button type="submit" className={styles.save}>
+                save
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </Modal>
   );
 };
@@ -113,11 +118,11 @@ ModifyModal.propTypes = {
 ModifyModal.defaultProps = {
   type: '',
   movieInfo: {
-    id: null,
+    id: undefined,
     title: '',
     releaseDate: '',
     url: '',
-    genre: '',
+    genres: [],
     overview: '',
     runtime: '',
   },
