@@ -1,11 +1,27 @@
 import React, { memo, useState, useContext } from 'react';
+import classNames from 'classnames/bind';
+
 import styles from './SortPanel.css';
 import { usePropsLogger } from '../../hooks/usePropsLogger';
 import { MainContext } from '../Main/Main';
 
+let cx = classNames.bind(styles);
+
 const InnerSortPanel = ({ headerTitle, list, toggleItem }) => {
   const [listOpen, setListOpen] = useState(false);
   const { sortByDateAndRatingHandle } = useContext(MainContext);
+
+  const dropdownClasses = cx({
+    dropdownHeader: true,
+    arrowUp: listOpen,
+    arrowDown: !listOpen,
+  });
+
+  const itemClasses = (item) =>
+    cx({
+      listItem: true,
+      selected: item.selected,
+    });
 
   const toggleList = () => {
     setListOpen(!listOpen);
@@ -17,12 +33,7 @@ const InnerSortPanel = ({ headerTitle, list, toggleItem }) => {
     <div className={styles.wrapper}>
       <p className={styles.title}>sort by</p>
 
-      <div
-        className={`${styles.dropdownHeader} ${
-          listOpen ? styles.arrowUp : styles.arrowDown
-        }`}
-        onClick={toggleList}
-      >
+      <div className={dropdownClasses} onClick={toggleList}>
         <div className={styles.headerTitle}>{headerTitle}</div>
       </div>
 
@@ -30,9 +41,7 @@ const InnerSortPanel = ({ headerTitle, list, toggleItem }) => {
         <ul className={styles.list}>
           {list.map((item) => (
             <li
-              className={`${styles.listItem} ${
-                item.selected ? styles.selected : ''
-              }`}
+              className={itemClasses(item)}
               key={item.id}
               onClick={() => {
                 toggleItem(item.id, item.key);

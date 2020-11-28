@@ -4,3 +4,14 @@
   color: #ffffff;
   border: none;
 }
+
+.label {
+  color: #f65261;
+  text-transform: uppercase;
+}
+
+.error {
+  margin-bottom: 20px;
+  font-size: 10px;
+  color: #eb1022;
+}
