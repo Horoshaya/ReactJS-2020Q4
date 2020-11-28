@@ -11,16 +11,11 @@ const InnerSortPanel = ({ headerTitle, list, toggleItem }) => {
   const [listOpen, setListOpen] = useState(false);
   const { sortByDateAndRatingHandle } = useContext(MainContext);
 
-  const dropdaownClasses = cx({
+  const dropdownClasses = cx({
     dropdownHeader: true,
     arrowUp: listOpen,
     arrowDown: !listOpen,
   });
-
-  // const itemClasses = cx({
-  //   listItem: true,
-  //   selected: item.selected,
-  // });
 
   const itemClasses = (item) =>
     cx({
@@ -38,7 +33,7 @@ const InnerSortPanel = ({ headerTitle, list, toggleItem }) => {
     <div className={styles.wrapper}>
       <p className={styles.title}>sort by</p>
 
-      <div className={dropdaownClasses} onClick={toggleList}>
+      <div className={dropdownClasses} onClick={toggleList}>
         <div className={styles.headerTitle}>{headerTitle}</div>
       </div>
 
