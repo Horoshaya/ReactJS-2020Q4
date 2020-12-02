@@ -1,0 +1,28 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.button {
+  padding: 10px 15px;
+  color: #f65261;
+  text-transform: uppercase;
+  background-color: #232323;
+  border: 1px solid #f65261;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.button:hover {
+  color: #ffffff;
+  background-color: #f65261;
+}

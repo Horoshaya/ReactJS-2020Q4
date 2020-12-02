@@ -10,6 +10,7 @@ const DeleteModal = ({ triggerModal, id }) => {
 
   const deleteMovieHandle = () => {
     dispatch(deletetMovie(id));
+    triggerModal('delete');
   };
   return (
     <Modal triggerModal={() => triggerModal('delete')}>

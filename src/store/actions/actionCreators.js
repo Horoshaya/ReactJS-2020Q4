@@ -1,9 +1,14 @@
 import ACTIONS from './actionTypes';
+import {
+  editMovieMiddleware,
+  addMovieMiddleware,
+  deletetMovieMiddleware,
+  getMovieMiddleware,
+} from '../middlewares';
 
 export const getMovie = () => {
   return (dispatch) => {
-    fetch('http://localhost:4000/movies')
-      .then((res) => res.json())
+    getMovieMiddleware()
       .then((movieData) => {
         dispatch({ type: `${ACTIONS.GET_MOVIE}`, payload: movieData.data });
       })
@@ -15,45 +20,26 @@ export const getMovie = () => {
 
 export const filterByGenre = (genre, { allMovies }) => {
   return (dispatch) => {
-    let updatedMovies = allMovies;
-
-    if (genre !== 'All') {
-      updatedMovies = allMovies.filter((movie) => movie.genres.includes(genre));
-    }
-
-    dispatch({ type: `${ACTIONS.FILTER_BY_GENRE}`, payload: updatedMovies });
+    dispatch({
+      type: `${ACTIONS.FILTER_BY_GENRE}`,
+      payload: { movies: allMovies, genre: genre },
+    });
   };
 };
 
 export const sortByDateAndRating = (type, { allMovies }) => {
   return (dispatch) => {
-    let updatedMovies = allMovies;
-
-    if (type === 'rating') {
-      updatedMovies = allMovies.sort(
-        (movie1, movie2) => movie2.vote_average - movie1.vote_average,
-      );
-    } else {
-      updatedMovies = allMovies.sort(
-        (movie1, movie2) =>
-          new Date(movie2.release_date) - new Date(movie1.release_date),
-      );
-    }
-
     dispatch({
       type: `${ACTIONS.SORT_BY_DATE_AND_RATING}`,
-      payload: updatedMovies,
+      payload: { movies: allMovies, type: type },
     });
   };
 };
 
 export const deletetMovie = (id) => {
   return (dispatch) => {
-    fetch(`http://localhost:4000/movies/movies/${id}?`, {
-      method: 'DELETE',
-    })
+    deletetMovieMiddleware(id)
       .then(() => {
-        dispatch({ type: `${ACTIONS.DELETE_MOVIE}`, payload: id });
         dispatch(getMovie());
       })
       .catch((err) => {
@@ -64,15 +50,8 @@ export const deletetMovie = (id) => {
 
 export const addMovie = (movieData) => {
   return (dispatch) => {
-    fetch(`http://localhost:4000/movies`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(movieData),
-    })
+    addMovieMiddleware(movieData)
       .then(() => {
-        dispatch({ type: `${ACTIONS.EDIT_MOVIE}`, payload: movieData });
         dispatch(getMovie());
       })
       .catch((err) => {
@@ -83,15 +62,8 @@ export const addMovie = (movieData) => {
 
 export const editMovie = (movieData) => {
   return (dispatch) => {
-    fetch(`http://localhost:4000/movies`, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(movieData),
-    })
+    editMovieMiddleware(movieData)
       .then(() => {
-        dispatch({ type: `${ACTIONS.EDIT_MOVIE}`, payload: movieData });
         dispatch(getMovie());
       })
       .catch((err) => {
