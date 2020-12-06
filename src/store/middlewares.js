@@ -1,29 +1,62 @@
-export const editMovieMiddleware = (movieData) => {
-  return fetch(`http://localhost:4000/movies`, {
-    method: 'PUT',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify(movieData),
-  });
+import { setMovieAction } from './actions/actionCreators';
+
+export const getMovieThunk = (dispatch) => {
+  fetch('http://localhost:4000/movies')
+    .then((res) => res.json())
+    .then((movieData) => {
+      dispatch(setMovieAction(movieData.data));
+    })
+    .catch((err) => {
+      console.error("Server doesn't response", err);
+    });
 };
 
-export const addMovieMiddleware = (movieData) => {
-  return fetch(`http://localhost:4000/movies`, {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify(movieData),
-  });
+export const deletetMovieThunk = (id) => {
+  return (dispatch) => {
+    fetch(`http://localhost:4000/movies/${id}?`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        dispatch(getMovieThunk);
+      })
+      .catch((err) => {
+        console.error("Server doesn't response", err);
+      });
+  };
 };
 
-export const deletetMovieMiddleware = (id) => {
-  return fetch(`http://localhost:4000/movies/${id}?`, {
-    method: 'DELETE',
-  });
+export const addMovieThunk = (movieData) => {
+  return (dispatch) => {
+    fetch(`http://localhost:4000/movies`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(movieData),
+    })
+      .then(() => {
+        dispatch(getMovieThunk);
+      })
+      .catch((err) => {
+        console.error("Server doesn't response", err);
+      });
+  };
 };
 
-export const getMovieMiddleware = () => {
-  return fetch('http://localhost:4000/movies').then((res) => res.json());
+export const editMovieThunk = (movieData) => {
+  return (dispatch) => {
+    fetch(`http://localhost:4000/movies`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(movieData),
+    })
+      .then(() => {
+        dispatch(getMovieThunk);
+      })
+      .catch((err) => {
+        console.error("Server doesn't response", err);
+      });
+  };
 };

@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 
 import Modal from '../Modal/Modal';
 import styles from './DeleteModal.css';
-import { deletetMovie } from '../../store/actions/actionCreators';
+import { deletetMovieThunk } from '../../store/middlewares';
 
 const DeleteModal = ({ triggerModal, id }) => {
   const dispatch = useDispatch();
 
   const deleteMovieHandle = () => {
-    dispatch(deletetMovie(id));
+    dispatch(deletetMovieThunk(id));
     triggerModal('delete');
   };
   return (
