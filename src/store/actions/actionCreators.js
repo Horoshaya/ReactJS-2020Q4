@@ -14,3 +14,8 @@ export const sortByDateAndRatingAcrtion = (type, { allMovies }) => ({
   type: `${ACTIONS.SORT_BY_DATE_AND_RATING}`,
   payload: { movies: allMovies, type: type },
 });
+
+export const getMovieFromTitle = (title) => ({
+  type: `${ACTIONS.SEARCH_BY_TITLE}`,
+  payload: title,
+});

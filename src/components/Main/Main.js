@@ -7,7 +7,7 @@ import {
   filterByGenreAction,
   sortByDateAndRatingAcrtion,
 } from '../../store/actions/actionCreators';
-import { getMovieThunk } from '../../store/middlewares';
+import { getMoviesThunk } from '../../store/middlewares';
 
 export const MainContext = React.createContext();
 
@@ -15,8 +15,8 @@ const Main = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMovieThunk);
-  }, [dispatch]);
+    dispatch(getMoviesThunk);
+  }, []);
 
   const filterByGenreHandle = (genre) => {
     dispatch(filterByGenreAction(genre, movieDataReducer));

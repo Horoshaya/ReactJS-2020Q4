@@ -1,6 +1,6 @@
 import { setMovieAction } from './actions/actionCreators';
 
-export const getMovieThunk = (dispatch) => {
+export const getMoviesThunk = (dispatch) => {
   fetch('http://localhost:4000/movies')
     .then((res) => res.json())
     .then((movieData) => {
@@ -17,7 +17,7 @@ export const deletetMovieThunk = (id) => {
       method: 'DELETE',
     })
       .then(() => {
-        dispatch(getMovieThunk);
+        dispatch(getMoviesThunk);
       })
       .catch((err) => {
         console.error("Server doesn't response", err);
@@ -35,7 +35,7 @@ export const addMovieThunk = (movieData) => {
       body: JSON.stringify(movieData),
     })
       .then(() => {
-        dispatch(getMovieThunk);
+        dispatch(getMoviesThunk);
       })
       .catch((err) => {
         console.error("Server doesn't response", err);
@@ -53,7 +53,7 @@ export const editMovieThunk = (movieData) => {
       body: JSON.stringify(movieData),
     })
       .then(() => {
-        dispatch(getMovieThunk);
+        dispatch(getMoviesThunk);
       })
       .catch((err) => {
         console.error("Server doesn't response", err);
