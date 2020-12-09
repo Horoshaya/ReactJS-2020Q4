@@ -16,7 +16,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(getMoviesThunk);
-  }, []);
+  }, [dispatch]);
 
   const filterByGenreHandle = (genre) => {
     dispatch(filterByGenreAction(genre, movieDataReducer));
@@ -35,7 +35,9 @@ const Main = () => {
       >
         <FiltersSortBar />
       </MainContext.Provider>
-      <MovieList movieReducer={movieDataReducer} />
+      <MovieList
+        movies={movieDataReducer ? movieDataReducer.allMovies : null}
+      />
     </main>
   );
 };

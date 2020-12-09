@@ -1,23 +1,22 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector, connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import MovieList from '../MovieList/MovieList';
-import { getMovieFromTitle } from '../../store/actions/actionCreators';
+import { getMovieFromTitleAction } from '../../store/actions/actionCreators';
 
-const SearchPage = (props) => {
-  const history = useHistory();
-  const dispatch = useDispatch(props);
+const SearchPage = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-  useEffect(() => {
-    dispatch(getMovieFromTitle(history.location.query));
-  }, []);
+  dispatch(getMovieFromTitleAction(location.search.substring(1)));
 
   const movieDataReducer = useSelector((store) => store.movieDataReducer);
+
   return (
     <main>
       <MovieList
-        movieReducer={movieDataReducer.movies.length ? movieDataReducer : null}
+        movies={movieDataReducer ? movieDataReducer.searchedMovies : null}
       />
     </main>
   );

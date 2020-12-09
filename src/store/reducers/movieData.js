@@ -35,13 +35,18 @@ export default (state, action) => {
         ...state,
         movies: action.payload.movies,
       };
+    case ACTIONS.SEARCH_BY_ID:
+      return {
+        ...state,
+        movie: action.payload,
+      };
     case ACTIONS.SEARCH_BY_TITLE:
       const searchedMovies = state.allMovies.filter((movie) =>
         movie.title.toLowerCase().includes(action.payload.toLowerCase()),
       );
       return {
         ...state,
-        movies: searchedMovies,
+        searchedMovies: searchedMovies,
       };
     default:
       return null;

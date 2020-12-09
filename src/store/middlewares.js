@@ -1,4 +1,4 @@
-import { setMovieAction } from './actions/actionCreators';
+import { setMovieAction, getMovieFromIdAction } from './actions/actionCreators';
 
 export const getMoviesThunk = (dispatch) => {
   fetch('http://localhost:4000/movies')
@@ -9,6 +9,19 @@ export const getMoviesThunk = (dispatch) => {
     .catch((err) => {
       console.error("Server doesn't response", err);
     });
+};
+
+export const getMoviesFromIdThunk = (id) => {
+  return (dispatch) => {
+    fetch(`http://localhost:4000/movies/${id}?`)
+      .then((res) => res.json())
+      .then((film) => {
+        dispatch(getMovieFromIdAction(film));
+      })
+      .catch((err) => {
+        console.error("Server doesn't response", err);
+      });
+  };
 };
 
 export const deletetMovieThunk = (id) => {
