@@ -36,7 +36,7 @@ const movieFilters = [
   },
 ];
 
-const InnerFiltersSortBar = () => {
+const FiltersSortBar = () => {
   const defaultTitle = 'select sort';
   const sortList = [
     {
@@ -90,4 +90,4 @@ const InnerFiltersSortBar = () => {
   );
 };
 
-export const FiltersSortBar = memo(InnerFiltersSortBar);
+export default memo(FiltersSortBar);

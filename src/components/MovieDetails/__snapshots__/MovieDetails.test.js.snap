@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when MovieDetails then snapshot created 1`] = `
+<a
+  href="/"
+  onClick={[Function]}
+>
+  <div>
+    <div>
+      <span />
+    </div>
+    <div>
+      <img />
+      <div>
+        <div>
+          <h2 />
+          <p />
+        </div>
+        <div>
+          <p />
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+`;

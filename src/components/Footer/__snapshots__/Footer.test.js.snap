@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FooterSection matches the Snapshot 1`] = `
+<footer>
+  <h2>
+    <span>
+      netflix
+    </span>
+    roulette
+  </h2>
+</footer>
+`;

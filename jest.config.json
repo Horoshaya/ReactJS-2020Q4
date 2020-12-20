@@ -1,0 +1,16 @@
+{
+  "transform": {
+    "^.+\\.(js|jsx)$": "babel-jest"
+  },
+  "testRegex": "((\\.|/*.)(test))\\.js?$",
+  "testEnvironment": "jsdom",
+  "testPathIgnorePatterns": ["/node_modules/"],
+  "moduleNameMapper": {
+    "\\.(css)$": "<rootDir>/__mocks__/styleMock.js",
+    "\\.(jpg|jpeg|png|svg)$": "<rootDir>/__mocks__/imgMock.js"
+  },
+  "collectCoverage": true,
+  "reporters": ["default"],
+  "verbose": true,
+  "setupFilesAfterEnv": ["<rootDir>enzyme.config.js"]
+}

@@ -7,7 +7,7 @@ import { MainContext } from '../Main/Main';
 
 let cx = classNames.bind(styles);
 
-const InnerSortPanel = ({ headerTitle, list, toggleItem }) => {
+const SortPanel = ({ headerTitle, list, toggleItem }) => {
   const [listOpen, setListOpen] = useState(false);
   const { sortByDateAndRatingHandle } = useContext(MainContext);
 
@@ -57,4 +57,4 @@ const InnerSortPanel = ({ headerTitle, list, toggleItem }) => {
   );
 };
 
-export const SortPanel = memo(InnerSortPanel);
+export default memo(SortPanel);

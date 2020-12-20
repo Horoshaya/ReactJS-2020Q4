@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when NotFound then snapshot created 1`] = `
+<div>
+  <div
+    onClick={[Function]}
+  />
+  <img
+    onError={[Function]}
+  />
+  <div>
+    <h3 />
+    <p>
+      NaN
+    </p>
+  </div>
+  <p />
+  <p />
+</div>
+`;

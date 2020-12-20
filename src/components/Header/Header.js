@@ -4,8 +4,8 @@ import styles from './Header.css';
 import Logo from '../Logo/Logo';
 import Search from '../Search/Search';
 import AddMovieButton from '../AddMovieButton/AddMovieButton';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import ErrorBoundaryTestButton from '../ErrorBoundary/ErrorBoundaryTestButton';
+import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
+import ErrorBoundaryTestButton from '../../ErrorBoundary/ErrorBoundaryTestButton';
 
 const Header = () => {
   return (

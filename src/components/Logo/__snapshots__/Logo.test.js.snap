@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Logo have text 1`] = `
+<h2>
+  <span>
+    netflix
+  </span>
+  roulette
+</h2>
+`;
+
+exports[`Logo snapshot should be created 1`] = `
+<h2>
+  <span>
+    netflix
+  </span>
+  roulette
+</h2>
+`;

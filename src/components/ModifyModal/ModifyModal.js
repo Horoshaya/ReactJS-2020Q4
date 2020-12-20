@@ -8,7 +8,10 @@ import Modal from '../Modal/Modal';
 import TextField from '../TextField/TextField';
 import Multiselect from '../Multiselect/Multiselect';
 import styles from './ModifyModal.css';
-import { editMovie, addMovie } from '../../store/actions/actionCreators';
+import {
+  editMovieThunk,
+  addMovieThunk,
+} from '../../store/middlewares';
 
 const ModifySchema = Yup.object().shape({
   title: Yup.string()
@@ -41,8 +44,8 @@ const ModifyModal = ({ triggerModal, movieInfo }) => {
       id: movieInfo ? movieInfo.id : new Date().getTime(),
     };
     movieInfo
-      ? dispatch(editMovie(newMoveData))
-      : dispatch(addMovie(newMoveData));
+      ? dispatch(editMovieThunk(newMoveData))
+      : dispatch(addMovieThunk(newMoveData));
     setSubmitting(false);
   };
 

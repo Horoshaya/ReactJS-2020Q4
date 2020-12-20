@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when Modal then snapshot created 1`] = `
+<div>
+  <div>
+    <span />
+  </div>
+  <div />
+</div>
+`;

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when SortPanel then snapshot created 1`] = `
+<div>
+  <p>
+    sort by
+  </p>
+  <div
+    className="dropdownHeader arrowDown"
+    onClick={[Function]}
+  >
+    <div />
+  </div>
+</div>
+`;

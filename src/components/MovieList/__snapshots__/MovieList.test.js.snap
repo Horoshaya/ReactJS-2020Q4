@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when MovieList then snapshot created 1`] = `
+<div>
+  <div
+    className="loader"
+  >
+    Loading...
+  </div>
+</div>
+`;

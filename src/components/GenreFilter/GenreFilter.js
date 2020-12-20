@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import styles from './GenreFilter.css';
 import GenreTab from '../GenreTab/GenreTab';
 
-const InnerGenreSorting = ({ tabs, handleSortByGenre }) => {
+const GenreFilter = ({ tabs }) => {
   return (
     <>
       {tabs.map((tab) => (
@@ -14,4 +14,4 @@ const InnerGenreSorting = ({ tabs, handleSortByGenre }) => {
   );
 };
 
-export const GenreFilter = memo(InnerGenreSorting);
+export default memo(GenreFilter);
