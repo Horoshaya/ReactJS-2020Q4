@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import MovieList from '../MovieList/MovieList';
 import { FiltersSortBar } from '../FiltersSortBar/FiltersSortBar';
 import {
-  getMovie,
-  filterByGenre,
-  sortByDateAndRating,
+  filterByGenreAction,
+  sortByDateAndRatingAcrtion,
 } from '../../store/actions/actionCreators';
+import { getMoviesThunk } from '../../store/middlewares';
 
 export const MainContext = React.createContext();
 
@@ -15,15 +15,15 @@ const Main = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMovie());
+    dispatch(getMoviesThunk);
   }, [dispatch]);
 
   const filterByGenreHandle = (genre) => {
-    dispatch(filterByGenre(genre, movieDataReducer));
+    dispatch(filterByGenreAction(genre, movieDataReducer));
   };
 
   const sortByDateAndRatingHandle = (sortTitle) => {
-    dispatch(sortByDateAndRating(sortTitle, movieDataReducer));
+    dispatch(sortByDateAndRatingAcrtion(sortTitle, movieDataReducer));
   };
 
   const movieDataReducer = useSelector((store) => store.movieDataReducer);
@@ -35,7 +35,9 @@ const Main = () => {
       >
         <FiltersSortBar />
       </MainContext.Provider>
-      <MovieList movieReducer={movieDataReducer} />
+      <MovieList
+        movies={movieDataReducer ? movieDataReducer.allMovies : null}
+      />
     </main>
   );
 };

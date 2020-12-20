@@ -5,7 +5,6 @@ import MovieMoreInfo from '../MovieMoreInfo/MovieMoreInfo';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import ModifyModal from '../ModifyModal/ModifyModal';
 import DeleteModal from '../DeleteModal/DeleteModal';
-import MovieDetails from '../MovieDetails/MovieDetails';
 
 import defaultImg from '../../assets/images/pulp_fiction.jpg';
 
@@ -32,21 +31,12 @@ const MovieCard = (props) => {
     return setSrc(defaultImg);
   };
 
-  const triggerMovieDetails = () => {
-    setOpenMovieDetaild(!isOpenMovieDetaild);
-  };
-
   return (
     <>
       <ErrorBoundary>
         <div className={styles.card}>
           <MovieMoreInfo triggerModal={triggerModal} />
-          <img
-            onClick={triggerMovieDetails}
-            className={styles.img}
-            src={src}
-            onError={onSrcError}
-          />
+          <img className={styles.img} src={src} onError={onSrcError} />
           <div className={styles.mainInfo}>
             <h3>{props.title}</h3>
             <p className={styles.year}>{date}</p>
@@ -55,12 +45,6 @@ const MovieCard = (props) => {
           <p className={styles.overview}>{props.overview}</p>
         </div>
       </ErrorBoundary>
-      {isOpenMovieDetaild ? (
-        <MovieDetails
-          triggerMovieDetails={triggerMovieDetails}
-          movieData={props}
-        />
-      ) : null}
 
       {isEditModal ? (
         <ModifyModal

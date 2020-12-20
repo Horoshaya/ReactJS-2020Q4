@@ -5,6 +5,8 @@ const actionTypes = {
   GET_MOVIE: 'GET_MOVIE',
   FILTER_BY_GENRE: 'FILTER_BY_GENRE',
   SORT_BY_DATE_AND_RATING: 'SORT_BY_DATE_AND_RATING',
+  SEARCH_BY_TITLE: 'SEARCH_BY_TITLE',
+  SEARCH_BY_ID: 'SEARCH_BY_ID',
 };
 
 export default actionTypes;
