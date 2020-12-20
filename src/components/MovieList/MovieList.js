@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './MovieList.css';
 import MovieCard from '../MovieCard/MovieCard';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 
 const MovieList = ({ movies }) => {
   return (

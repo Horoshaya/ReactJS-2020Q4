@@ -1,27 +1,23 @@
 import { setMovieAction, getMovieFromIdAction } from './actions/actionCreators';
 
 export const getMoviesThunk = (dispatch) => {
-  fetch('http://localhost:4000/movies')
-    .then((res) => res.json())
-    .then((movieData) => {
-      dispatch(setMovieAction(movieData.data));
-    })
-    .catch((err) => {
-      console.error("Server doesn't response", err);
-    });
-};
-
-export const getMoviesFromIdThunk = (id) => {
-  return (dispatch) => {
-    fetch(`http://localhost:4000/movies/${id}?`)
+  return (dispatch) =>
+    fetch('http://localhost:4000/movies')
       .then((res) => res.json())
-      .then((film) => {
-        dispatch(getMovieFromIdAction(film));
-      })
+      .then((movieData) => dispatch(setMovieAction(movieData.data)))
       .catch((err) => {
         console.error("Server doesn't response", err);
       });
-  };
+};
+
+export const getMoviesFromIdThunk = (id) => {
+  return (dispatch) =>
+    fetch(`http://localhost:4000/movies/${id}?`)
+      .then((res) => res.json())
+      .then((film) => dispatch(getMovieFromIdAction(film)))
+      .catch((err) => {
+        console.error("Server doesn't response", err);
+      });
 };
 
 export const deletetMovieThunk = (id) => {
@@ -57,7 +53,7 @@ export const addMovieThunk = (movieData) => {
 };
 
 export const editMovieThunk = (movieData) => {
-  return (dispatch) => {
+  return (dispatch) =>
     fetch(`http://localhost:4000/movies`, {
       method: 'PUT',
       headers: {
@@ -71,5 +67,4 @@ export const editMovieThunk = (movieData) => {
       .catch((err) => {
         console.error("Server doesn't response", err);
       });
-  };
 };

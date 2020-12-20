@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when Search then snapshot created 1`] = `
+Array [
+  <input
+    name="title"
+    onKeyUp={[Function]}
+    placeholder="What do you want to watch?"
+    type="text"
+  />,
+  <button
+    onClick={[Function]}
+  >
+    Search
+  </button>,
+]
+`;

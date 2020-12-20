@@ -24,4 +24,3 @@ const DeleteModal = ({ triggerModal, id }) => {
 };
 
 export default DeleteModal;
-// 269149;

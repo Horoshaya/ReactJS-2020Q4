@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import styles from './AddMovieButton.css';
 import ModifyModal from '../ModifyModal/ModifyModal';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 import { usePropsLogger } from '../../hooks/usePropsLogger';
 
 const AddMovieButton = () => {

@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 
 import styles from './MovieCard.css';
 import MovieMoreInfo from '../MovieMoreInfo/MovieMoreInfo';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 import ModifyModal from '../ModifyModal/ModifyModal';
 import DeleteModal from '../DeleteModal/DeleteModal';
 
@@ -12,7 +12,6 @@ const MovieCard = (props) => {
   const [isEditModal, setEditModal] = useState(false);
   const [isDeleteModal, setDeleteModal] = useState(false);
   const [src, setSrc] = useState(props.poster_path);
-  const [isOpenMovieDetaild, setOpenMovieDetaild] = useState(false);
 
   const triggerModal = useCallback(
     (modalName) => {

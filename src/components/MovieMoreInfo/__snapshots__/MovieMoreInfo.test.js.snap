@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when MovieMoreInfo then snapshot created 1`] = `
+<div
+  onClick={[Function]}
+/>
+`;

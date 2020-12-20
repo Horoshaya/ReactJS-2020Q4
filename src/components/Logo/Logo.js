@@ -4,7 +4,7 @@ import styles from "./Logo.css";
 const Logo = () => {
   return (
     <h2 className={styles.title}>
-      <span className={styles.titleAccent}>netflix</span>roulette
+      <span className={styles.title}>netflix</span>roulette
     </h2>
   );
 };

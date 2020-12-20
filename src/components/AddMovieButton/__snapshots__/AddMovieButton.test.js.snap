@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddMovieButton should created snapshot 1`] = `
+<button
+  onClick={[Function]}
+>
+  + add movie
+</button>
+`;
+
+exports[`when AddButton then snapshot created 1`] = `
+<button
+  onClick={[Function]}
+>
+  + add movie
+</button>
+`;

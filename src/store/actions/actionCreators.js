@@ -1,9 +1,11 @@
 import ACTIONS from './actionTypes';
 
-export const setMovieAction = (movieData) => ({
-  type: `${ACTIONS.GET_MOVIE}`,
-  payload: movieData,
-});
+export const setMovieAction = (movieData) => {
+  return {
+    type: `${ACTIONS.GET_MOVIE}`,
+    payload: movieData,
+  };
+};
 
 export const filterByGenreAction = (genre, { allMovies }) => ({
   type: `${ACTIONS.FILTER_BY_GENRE}`,
