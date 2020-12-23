@@ -4,12 +4,11 @@ import { Provider } from 'react-redux';
 import styles from './App.css';
 import Routes from './components/Routes';
 import store from './store/initialState';
-import { BrowserRouter as Router } from 'react-router-dom';
 
-const App = () => {
+const App = ({ Router, location, context, store }) => {
   return (
     <Provider store={store}>
-      <Router>
+      <Router location={location} context={context} store={store}>
         <Routes />
       </Router>
     </Provider>
