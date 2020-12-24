@@ -13,11 +13,7 @@ function renderHtml(html, preloadedState) {
          <head>
            <meta charset=utf-8>
            <title>Movies SSR</title>
-           ${
-             process.env.NODE_ENV === 'development'
-               ? ''
-               : '<link href="/css/main.css" rel="stylesheet" type="text/css">'
-           }
+           <link href="style.css" rel="stylesheet" type="text/css">'
           <link rel="icon" href="./assets/images/favicon.ico" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="description" content="Web site created by Darya Horoshaya" />
@@ -45,7 +41,6 @@ const getInitialState = async () => {
     .then(res => res.json())
     .then(res => res.data);
 
-  console.log('items');
   return { movieDataReducer: {allMovies: items} }
  }
 
@@ -57,7 +52,6 @@ export default () => {
 
     const store =  createStore(initialState);
     const context = {};
-    console.log('getState', store.getState());
 
     const renderRoot = () => (
       <App

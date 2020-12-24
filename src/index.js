@@ -4,13 +4,6 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import createStore from './store/initialState';
 
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById("root")
-// );
-
 const store = createStore(window.PRELOADED_STATE);
 
 ReactDOM.hydrate(

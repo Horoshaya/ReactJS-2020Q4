@@ -12,11 +12,9 @@ import { getMoviesThunk } from '../../store/middlewares';
 export const MainContext = React.createContext();
 
 const Main = () => {
-  console.log('Main component');
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('useEffect');
     dispatch(getMoviesThunk);
   }, [dispatch]);
 
@@ -29,7 +27,6 @@ const Main = () => {
   };
 
   const movieDataReducer = useSelector((store) => {
-    console.log('useSelector, store', store);
     return store.movieDataReducer;
   });
 

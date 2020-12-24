@@ -3,11 +3,9 @@ require('fetch-everywhere');
 console.log('middleware file');
 
 export const getMoviesThunk = (dispatch) => {
-  console.log('fetch');
   return fetch('http://localhost:4000/movies')
     .then((res) => res.json())
     .then((movieData) => {
-      console.log('fetch then return dispatch(setMovieAction(movieData.data)');
       return dispatch(setMovieAction(movieData.data));
     })
     .catch((err) => {

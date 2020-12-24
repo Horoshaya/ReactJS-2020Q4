@@ -1,7 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const merge = require('webpack-merge');
-const common = require('./webpack.config.common');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -12,24 +12,21 @@ module.exports = {
     filename: 'serverRenderer.js',
     libraryTarget: 'commonjs2',
   },
-  resolve: {
-    extensions: ['.js'],
-  },
   module: {
     rules: [
       {
         test: /\.css$/,
-        include: /src/,
-        use: [
-          {
+                use: [
+                {
+                loader: MiniCssExtractPlugin.loader,
+                },
+                {
             loader: 'css-loader',
             options: {
-              onlyLocals: true,
-              importLoaders: 1,
               modules: true,
             },
           },
-        ],
+          ]
       },
       {
         test: /\.(js|jsx)$/,
@@ -50,4 +47,13 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+     new MiniCssExtractPlugin({
+       filename: "style.css",
+     }),
+   ],
+   optimization: {
+    minimize: true,
+    minimizer: [new OptimizeCSSAssetsPlugin({})],
+  }
 };
