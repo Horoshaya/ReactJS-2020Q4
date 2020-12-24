@@ -92,8 +92,6 @@ export default function serverRenderer() {
     );
     console.log('after getState', store.getState());
 
-    // renderToString(renderRoot());
-
     if (context.url) {
       res.writeHead(302, {
         Location: context.url,
