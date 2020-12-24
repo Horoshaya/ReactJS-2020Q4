@@ -3,6 +3,7 @@ import ACTIONS from '../actions/actionTypes';
 export default (state, action) => {
   switch (action.type) {
     case ACTIONS.GET_MOVIE:
+      console.log('reducer', state);
       return {
         ...state,
         movies: action.payload,

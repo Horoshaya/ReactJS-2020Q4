@@ -3,12 +3,13 @@ import { Provider } from 'react-redux';
 
 import styles from './App.css';
 import Routes from './components/Routes';
-import store from './store/initialState';
+import Main from './components/Main/Main';
 
 const App = ({ Router, location, context, store }) => {
   return (
     <Provider store={store}>
-      <Router location={location} context={context} store={store}>
+      <Main />
+      <Router location={location} context={context}>
         <Routes />
       </Router>
     </Provider>

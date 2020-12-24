@@ -3,20 +3,6 @@ const nodeExternals = require('webpack-node-externals');
 const merge = require('webpack-merge');
 const common = require('./webpack.config.common');
 
-// module.exports = merge(common, {
-//   mode: 'development',
-//   target: 'node',
-//   entry: path.join(__dirname, '..', 'src', 'serverRenderer.js'),
-//   externals: [nodeExternals()],
-//   output: {
-//     filename: 'serverRenderer.js',
-//     libraryTarget: 'commonjs2',
-//   },
-//   resolve: {
-//     extensions: ['.js', '.jsx'],
-//   },
-// });
-
 module.exports = {
   mode: 'development',
   target: 'node',
@@ -38,6 +24,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
+              onlyLocals: true,
               importLoaders: 1,
               modules: true,
             },

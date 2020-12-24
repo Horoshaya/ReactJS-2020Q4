@@ -12,11 +12,14 @@ import { getMoviesThunk } from '../../store/middlewares';
 export const MainContext = React.createContext();
 
 const Main = () => {
+  console.log('Main component');
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getMoviesThunk);
-  }, [dispatch]);
+  dispatch(getMoviesThunk);
+  // useEffect(() => {
+  //   console.log('useEffect');
+  //   dispatch(getMoviesThunk);
+  // });
 
   const filterByGenreHandle = (genre) => {
     dispatch(filterByGenreAction(genre, movieDataReducer));
@@ -26,7 +29,10 @@ const Main = () => {
     dispatch(sortByDateAndRatingAcrtion(sortTitle, movieDataReducer));
   };
 
-  const movieDataReducer = useSelector((store) => store.movieDataReducer);
+  const movieDataReducer = useSelector((store) => {
+    console.log('useSelector, store', store);
+    return store.movieDataReducer;
+  });
 
   return (
     <main>

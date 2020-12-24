@@ -3,14 +3,15 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router';
 import fs from 'fs';
 import path from 'path';
+import qs from 'qs';
 import App from './App';
-import store from './store/initialState';
+import createStore from './store/initialState';
 import routes from './serverRouting';
 import Routes from './components/Routes';
 
 function renderHtml(html, preloadedState) {
   return `
-       <!doctype html>
+       <!DOCTYPE html>
        <html>
          <head>
            <meta charset=utf-8>
@@ -36,54 +37,74 @@ function renderHtml(html, preloadedState) {
                '\\u003c',
              )}
            </script>
-           <script src="/index.js"></script>
+           <script src="/dist/index.js"></script>
          </body>
        </html>
    `;
 }
 
+// export default function serverRenderer() {
+//   return (req, res) => {
+//     const context = {};
+//     const params = qs.parse(req.query);
+//     const movieId = parseInt(params.movieId, 10) || 0;
+//     const store = createStore(preloadedState);
+
+//     let preloadedState = { movieId };
+
+//     const renderRoot = () => (
+//       <App
+//         Router={StaticRouter}
+//         location={req.url}
+//         context={context}
+//         store={store}
+//       />
+//     );
+//     if (context.url) {
+//       res.writeHead(302, {
+//         Location: context.url,
+//       });
+//       res.end();
+//       return;
+//     }
+
+//     const htmlString = renderToString(renderRoot());
+//     console.log('serverRenderer getState', store.getState());
+
+//     const finalState = store.getState();
+//     res.send(renderHtml(htmlString, finalState));
+//   };
+// }
+
 export default function serverRenderer() {
   return (req, res) => {
-    const promises = routes.reduce((acc, route) => {
-      console.log('route', route.component.filterByGenreHandle);
-      if (
-        matchPath(req.url, route) & route.component &&
-        route.component.useEffect
-      ) {
-        acc.push(Promise.resolve(store.dispatch(route.component.useEffect())));
-      } else {
-        console.log('test', req.url, route);
-      }
-    }, []);
-    console.log('routes', promises);
-    Promise.all(promises)
-      .then(() => {
-        const context = {};
+    const store = createStore();
+    const context = {};
+    console.log('before getState', store.getState());
 
-        const renderRoot = () => (
-          <App
-            Router={StaticRouter}
-            location={req.url}
-            context={context}
-            store={store}
-          />
-        );
+    const renderRoot = () => (
+      <App
+        Router={StaticRouter}
+        location={req.url}
+        context={context}
+        store={store}
+      />
+    );
+    console.log('after getState', store.getState());
 
-        renderToString(renderRoot());
+    // renderToString(renderRoot());
 
-        if (context.url) {
-          res.writeHead(302, {
-            Location: context.url,
-          });
-          res.end();
-          return;
-        }
+    if (context.url) {
+      res.writeHead(302, {
+        Location: context.url,
+      });
+      res.end();
+      return;
+    }
 
-        const htmlString = renderToString(renderRoot());
-        const preloadedState = store.getState();
+    const htmlString = renderToString(renderRoot());
 
-        res.send(renderHtml(htmlString, preloadedState));
-      })
-      .catch((e) => console.error(e));
+    const finalState = store.getState();
+    res.send(renderHtml(htmlString, finalState));
   };
 }

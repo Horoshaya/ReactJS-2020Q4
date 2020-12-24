@@ -1,10 +1,14 @@
 import { setMovieAction, getMovieFromIdAction } from './actions/actionCreators';
+require('fetch-everywhere');
+console.log('middleware file');
 
 export const getMoviesThunk = (dispatch) => {
-  fetch('http://localhost:4000/movies')
+  console.log('fetch');
+  return fetch('http://localhost:4000/movies')
     .then((res) => res.json())
     .then((movieData) => {
-      dispatch(setMovieAction(movieData.data));
+      console.log('fetch then return dispatch(setMovieAction(movieData.data)');
+      return dispatch(setMovieAction(movieData.data));
     })
     .catch((err) => {
       console.error("Server doesn't response", err);
