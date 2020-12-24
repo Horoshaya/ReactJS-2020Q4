@@ -1,6 +1,7 @@
 import ACTIONS from '../actions/actionTypes';
 
-export default (state, action) => {
+export default (state = {}, action) => {
+  console.log(state);
   switch (action.type) {
     case ACTIONS.GET_MOVIE:
       console.log('reducer', state);
@@ -50,6 +51,6 @@ export default (state, action) => {
         searchedMovies: searchedMovies,
       };
     default:
-      return null;
+      return state;
   }
 };

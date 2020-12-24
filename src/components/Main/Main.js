@@ -15,11 +15,10 @@ const Main = () => {
   console.log('Main component');
   const dispatch = useDispatch();
 
-  dispatch(getMoviesThunk);
-  // useEffect(() => {
-  //   console.log('useEffect');
-  //   dispatch(getMoviesThunk);
-  // });
+  useEffect(() => {
+    console.log('useEffect');
+    dispatch(getMoviesThunk);
+  }, [dispatch]);
 
   const filterByGenreHandle = (genre) => {
     dispatch(filterByGenreAction(genre, movieDataReducer));

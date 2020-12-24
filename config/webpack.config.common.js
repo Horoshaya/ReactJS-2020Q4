@@ -50,7 +50,7 @@ module.exports = {
       filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: 'main.css',
+      filename: '[name].css',
     }),
     new FaviconsWebpackPlugin(
       path.join(__dirname, '../src', '/assets/images/favicon.ico'),

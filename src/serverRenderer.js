@@ -1,13 +1,10 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { StaticRouter, matchPath } from 'react-router';
-import fs from 'fs';
-import path from 'path';
-import qs from 'qs';
+import { StaticRouter } from 'react-router';
 import App from './App';
 import createStore from './store/initialState';
-import routes from './serverRouting';
-import Routes from './components/Routes';
+
+ const API_URL = 'http://localhost:4000/movies';
 
 function renderHtml(html, preloadedState) {
   return `
@@ -43,44 +40,24 @@ function renderHtml(html, preloadedState) {
    `;
 }
 
-// export default function serverRenderer() {
-//   return (req, res) => {
-//     const context = {};
-//     const params = qs.parse(req.query);
-//     const movieId = parseInt(params.movieId, 10) || 0;
-//     const store = createStore(preloadedState);
+const getInitialState = async () => {
+  const items = await fetch(API_URL)
+    .then(res => res.json())
+    .then(res => res.data);
 
-//     let preloadedState = { movieId };
+  console.log('items');
+  return { movieDataReducer: {allMovies: items} }
+ }
 
-//     const renderRoot = () => (
-//       <App
-//         Router={StaticRouter}
-//         location={req.url}
-//         context={context}
-//         store={store}
-//       />
-//     );
-//     if (context.url) {
-//       res.writeHead(302, {
-//         Location: context.url,
-//       });
-//       res.end();
-//       return;
-//     }
 
-//     const htmlString = renderToString(renderRoot());
-//     console.log('serverRenderer getState', store.getState());
+// serverRenderer
+export default () => {
+  return async (req, res) => {
+    const initialState = await getInitialState(req);
 
-//     const finalState = store.getState();
-//     res.send(renderHtml(htmlString, finalState));
-//   };
-// }
-
-export default function serverRenderer() {
-  return (req, res) => {
-    const store = createStore();
+    const store =  createStore(initialState);
     const context = {};
-    console.log('before getState', store.getState());
+    console.log('getState', store.getState());
 
     const renderRoot = () => (
       <App
@@ -90,7 +67,6 @@ export default function serverRenderer() {
         store={store}
       />
     );
-    console.log('after getState', store.getState());
 
     if (context.url) {
       res.writeHead(302, {
