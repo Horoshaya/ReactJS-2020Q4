@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import styles from './MovieList.css';
 import MovieCard from '../MovieCard/MovieCard';
@@ -11,7 +10,6 @@ const MovieList = ({ movies }) => {
       <ErrorBoundary>
         {movies ? (
           movies.map((movie) => (
-            <Link to={`/movie/${movie.id}`} key={movie.id}>
               <MovieCard
                 key={movie.id}
                 id={movie.id}
@@ -23,7 +21,6 @@ const MovieList = ({ movies }) => {
                 vote_average={movie.vote_average}
                 runtime={movie.runtime}
               />
-            </Link>
           ))
         ) : (
           <div className="loader">Loading...</div>
