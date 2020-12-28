@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -25,15 +26,16 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1,
               modules: true,
             },
           },
-        ],
+        ]
       },
       {
         test: /\.(png|jpg|svg|gif)$/,
@@ -42,15 +44,14 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Best Movies',
       template: 'src/index.html',
       filename: 'index.html',
     }),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[name].css',
+      filename: 'style.css',
     }),
     new FaviconsWebpackPlugin(
       path.join(__dirname, '../src', '/assets/images/favicon.ico'),
@@ -61,8 +62,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json'],
   },
   optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
+    minimize: true,
+    minimizer: [new OptimizeCSSAssetsPlugin({})],
+  }
 };

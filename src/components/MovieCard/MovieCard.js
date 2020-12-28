@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './MovieCard.css';
 import MovieMoreInfo from '../MovieMoreInfo/MovieMoreInfo';
@@ -36,7 +37,9 @@ const MovieCard = (props) => {
       <ErrorBoundary>
         <div className={styles.card}>
           <MovieMoreInfo triggerModal={triggerModal} />
-          <img className={styles.img} src={src} onError={onSrcError} />
+          <Link to={`/movie/${props.id}`} key={props.id}>
+            <img className={styles.img} src={src} onError={onSrcError} />
+          </Link>
           <div className={styles.mainInfo}>
             <h3>{props.title}</h3>
             <p className={styles.year}>{date}</p>

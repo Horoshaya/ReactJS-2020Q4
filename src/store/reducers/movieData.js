@@ -1,6 +1,6 @@
 import ACTIONS from '../actions/actionTypes';
 
-export default (state, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case ACTIONS.GET_MOVIE:
       return {
@@ -49,6 +49,6 @@ export default (state, action) => {
         searchedMovies: searchedMovies,
       };
     default:
-      return null;
+      return state;
   }
 };

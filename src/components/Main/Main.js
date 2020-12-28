@@ -26,7 +26,9 @@ const Main = () => {
     dispatch(sortByDateAndRatingAcrtion(sortTitle, movieDataReducer));
   };
 
-  const movieDataReducer = useSelector((store) => store.movieDataReducer);
+  const movieDataReducer = useSelector((store) => {
+    return store.movieDataReducer;
+  });
 
   return (
     <main>
