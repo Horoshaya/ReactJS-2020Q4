@@ -16,11 +16,9 @@ const AddMovieButton = () => {
 
   return (
     <>
-      <ErrorBoundary>
         <button className={styles.button} onClick={triggerModal}>
           + add movie
         </button>
-      </ErrorBoundary>
       {isModalOpen ? (
         <ModifyModal triggerModal={triggerModal}></ModifyModal>
       ) : null}
