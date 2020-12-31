@@ -36,7 +36,7 @@ const Main = () => {
         <FiltersSortBar />
       </MainContext.Provider>
       <MovieList
-        movies={movieDataReducer ? movieDataReducer.allMovies : null}
+        movies={movieDataReducer ? movieDataReducer.movies : null}
       />
     </main>
   );
